@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Patrick",
+        "dob": "2020-06-21",
+        "gender": "Laki-laki",
+        "family": "Ada - Ringan",
+        "score": 0.626,
+        "risk": "Medium",
+        "program_name": "Terapi Integrasi Sensorik",
+        "program_details": {
+            "code": "C1",
+            "title": "Terapi Integrasi Sensorik",
+            "goal": "Membantu otak anak memproses informasi sensorik (suara, sentuhan, cahaya) dengan lebih efisien agar tidak merasa kewalahan (overwhelmed) atau kurang peka.",
+            "activity": "Menggunakan alat seperti noise cancelling headphones, ruangan kedap suara untuk menenangkan anak.",
+            "school": "Penyediaan Quiet Corner (pojok tenang) saat anak merasa bising. Penggunaan noise-canceling headphones saat belajar mandiri. Modifikasi lingkungan kelas dengan pencahayaan yang tidak terlalu menyilaukan."
+        },
+        "prominent_criteria": {
+            "code": "C1",
+            "name": "Sensitivitas Sensorik",
+            "value": 1.0
+        },
+        "features": {
+            "C1": 1.0,
+            "C2": 0.3333333333333333,
+            "C3": 0.5,
+            "C4": 0.0,
+            "C5": 0.0
+        },
+        "id": 1,
+        "date": "2025-12-12 16:52"
+    }
+]

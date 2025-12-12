@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row justify-content-center pb-5">
+    <div class="col-md-8">
+        <div class="card p-5">
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Edit Data Anak</h2>
+                <a href="/children" class="btn btn-close"></a>
+            </div>
+
+            <form action="/update_child_bio" method="POST">
+                
+                <!-- Hidden fields to identify which record to update -->
+                <input type="hidden" name="original_name" value="{{ child.name }}">
+                <input type="hidden" name="original_dob" value="{{ child.dob }}">
+
+                <div class="row">
+                    <!-- Full Name -->
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-bold">Nama Lengkap</label>
+                        <input type="text" name="student_name" class="form-control" required value="{{ child.name }}">
+                    </div>
+
+                    <!-- DOB & Gender -->
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Tanggal Lahir</label>
+                        <input type="date" name="dob" class="form-control" required value="{{ child.dob }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Jenis Kelamin</label>
+                        <select name="gender" class="form-select" required>
+                            <option value="Laki-laki" {% if child.gender == 'Laki-laki' %}selected{% endif %}>Laki-laki</option>
+                            <option value="Perempuan" {% if child.gender == 'Perempuan' %}selected{% endif %}>Perempuan</option>
+                        </select>
+                    </div>
+
+                    <!-- Medical History -->
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-bold">Riwayat Medis Anak</label>
+                        <textarea name="medical_history" class="form-control" rows="2">{{ child.medical }}</textarea>
+                    </div>
+
+                    <!-- Family History -->
+                    <div class="col-md-12 mb-4">
+                        <label class="form-label fw-bold">Riwayat Kesehatan Mental Keluarga</label>
+                        <select name="family_history" class="form-select" required>
+                            <option value="Tidak Ada" {% if child.family == 'Tidak Ada' %}selected{% endif %}>Tidak ada riwayat ASD/Gangguan Mental</option>
+                            <option value="Ada - Ringan" {% if child.family == 'Ada - Ringan' %}selected{% endif %}>Ada riwayat gangguan kecemasan/depresi</option>
+                            <option value="Ada - ASD" {% if child.family == 'Ada - ASD' %}selected{% endif %}>Ada saudara/orang tua dengan ASD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-2">
+                    <!-- <a href="/children" class="btn btn-outline-secondary">Batal</a> -->
+                    <button type="submit" class="btn btn-primary px-4">
+                        Simpan Perubahan <i class="bi bi-save ms-2"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

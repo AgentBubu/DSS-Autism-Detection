@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row justify-content-center pb-5">
+    <div class="col-md-9">
+        <div class="card p-5" style="overflow: hidden;">
+            
+            <form action="/analyze" method="POST" id="assessmentForm">
+                
+                <!-- SECTION 1: BIODATA ANAK -->
+                <div id="bioSection">
+                    <h2 class="text-center mb-2">Data Diri Anak</h2>
+                    <div class="text-center text-muted mb-4 small text-uppercase">Lengkapi informasi berikut sebelum memulai</div>
+
+                    <div class="row">
+                        <!-- Full Name -->
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Nama Lengkap</label>
+                            <input type="text" name="student_name" class="form-control" required placeholder="Contoh: Budi Santoso">
+                        </div>
+
+                        <!-- DOB & Gender -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Tanggal Lahir</label>
+                            <input type="date" name="dob" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Jenis Kelamin</label>
+                            <select name="gender" class="form-select" required>
+                                <option value="" selected disabled>Pilih...</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <!-- Family History -->
+                        <div class="col-md-12 mb-4">
+                            <label class="form-label fw-bold">Riwayat Kesehatan Mental Keluarga</label>
+                            <select name="family_history" class="form-select" required>
+                                <option value="" selected disabled>Pilih kondisi keluarga...</option>
+                                <option value="Tidak Ada">Tidak ada riwayat ASD/Gangguan Mental</option>
+                                <option value="Ada - Ringan">Ada riwayat gangguan kecemasan/depresi</option>
+                                <option value="Ada - ASD">Ada saudara/orang tua dengan ASD</option>
+                            </select>
+                            <!-- <div class="form-text text-muted small">Faktor genetik dapat mempengaruhi risiko ASD.</div> -->
+                        </div>
+                    </div>
+
+                    <!-- Button Lanjut -->
+                    <div class="d-flex justify-content-end mt-2">
+                        <button type="button" class="btn btn-primary px-4" onclick="goToQuestions()">
+                            Lanjut <i class="bi bi-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: KUESIONER (Hidden by default) -->
+                <div id="questionSection" style="display: none; opacity: 0;">
+                    <h2 class="text-center mb-4">Kuesioner</h2>
+                    <p class="text-muted text-center mb-5">
+                        Jawab <strong class="text-danger">Ya </strong> jika perilaku sering muncul, <strong class="text-dark">Tidak </strong> jika jarang/tidak pernah.
+                    </p>
+
+                    <!-- Questions List (Translated & Fixed UI) -->
+                    {% set questions = [
+                        ('q1', 'Apakah anak sering memperhatikan suara-suara kecil yang tidak didengar orang lain?'),
+                        ('q2', 'Apakah anak lebih fokus pada gambaran besar daripada detail kecil?'),
+                        ('q3', 'Bisakah anak melakukan beberapa tugas sekaligus dengan mudah?'),
+                        ('q4', 'Bisakah anak kembali beraktivitas dengan mudah setelah diinterupsi/diganggu?'),
+                        ('q5', 'Apakah anak mudah mengenali pola pada benda-benda?'),
+                        ('q6', 'Apakah anak tahu cara memulai dan mempertahankan percakapan?'),
+                        ('q7', 'Apakah anak memahami maksud atau niat karakter dalam cerita fiksi?'),
+                        ('q8', 'Apakah anak kesulitan membayangkan menjadi orang lain (bermain peran)?'),
+                        ('q9', 'Apakah anak menikmati acara/kumpul sosial?'),
+                        ('q10', 'Apakah anak terobsesi pada minat/topik tertentu secara berlebihan?')
+                    ] %}
+
+                    {% for id, text in questions %}
+                    <div class="mb-4 p-4 rounded card shadow-sm border-0" style="background: rgba(255,255,255,0.5);">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                            
+                            <!-- Question Text -->
+                            <label class="mb-3 mb-md-0 fw-medium" style="font-size: 1rem; flex: 1; padding-right: 20px;">
+                                {{ loop.index }}. {{ text }}
+                            </label>
+
+                            <!-- Radio Buttons Group -->
+                            <div class="radio-group" style="min-width: 160px;">
+                                
+                                <!-- Option: TIDAK -->
+                                <input type="radio" class="btn-check" name="{{id}}" id="{{id}}_no" value="0" checked autocomplete="off">
+                                <label class="btn btn-outline-secondary" for="{{id}}_no">Tidak</label>
+
+                                <!-- Option: YA -->
+                                <input type="radio" class="btn-check" name="{{id}}" id="{{id}}_yes" value="1" autocomplete="off">
+                                <label class="btn btn-outline-danger" for="{{id}}_yes">Ya</label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-outline-secondary" onclick="goBackToBio()">
+                            <i class="bi bi-arrow-left me-2"></i> Kembali
+                        </button>
+                        <button type="submit" class="btn btn-primary py-2 px-5 shadow-sm">
+                            Analisis Hasil <i class="bi bi-magic ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goToQuestions() {
+        // Validate Bio Section first
+        const bioInputs = document.querySelectorAll('#bioSection input, #bioSection select');
+        let valid = true;
+        bioInputs.forEach(input => {
+            if (!input.checkValidity()) {
+                input.reportValidity();
+                valid = false;
+            }
+        });
+        
+        if (valid) {
+            const bio = document.getElementById('bioSection');
+            const quest = document.getElementById('questionSection');
+
+            // Slide Out Bio (Up)
+            bio.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+            bio.style.transform = "translateY(-50px)";
+            bio.style.opacity = "0";
+
+            setTimeout(() => {
+                bio.style.display = "none";
+                quest.style.display = "block";
+                
+                // Prepare slide in for Question
+                quest.style.transform = "translateY(50px)";
+                
+                // Trigger reflow
+                void quest.offsetWidth;
+
+                quest.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+                quest.style.transform = "translateY(0)";
+                quest.style.opacity = "1";
+            }, 500);
+        }
+    }
+
+    function goBackToBio() {
+        const bio = document.getElementById('bioSection');
+        const quest = document.getElementById('questionSection');
+
+        quest.style.transform = "translateY(50px)";
+        quest.style.opacity = "0";
+
+        setTimeout(() => {
+            quest.style.display = "none";
+            bio.style.display = "block";
+            
+            bio.style.transform = "translateY(-50px)";
+            void bio.offsetWidth;
+
+            bio.style.transform = "translateY(0)";
+            bio.style.opacity = "1";
+        }, 500);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,267 @@
+/* Changed font to Inter (Standard for modern Tech/SaaS sites like Stacker) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    /* Palette extracted from the Stacker image */
+    --bg-color: #ffffff;
+    --grad-blue: #bfdbfe;     /* Light Blue blur */
+    --grad-purple: #e9d5ff;   /* Light Purple blur */
+    --grad-green: #bbf7d0;    /* Light Green blur */
+    
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 1);
+    
+    --primary-text: #0f172a;  /* Dark Navy/Slate for high contrast */
+    --secondary-text: #475569; /* Muted Slate */
+    
+    --accent-blue: #2563eb;   /* Royal Blue (The "Get Started" button color) */
+    --accent-hover: #1d4ed8;  /* Darker Blue */
+    --accent-green: #10b981;  /* For secondary accents */
+}
+
+body {
+    background-color: var(--bg-color);
+    /* Creating the "Aurora" effect at the bottom */
+    background-image: 
+        radial-gradient(at 0% 100%, var(--grad-blue) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, var(--grad-purple) 0px, transparent 50%),
+        radial-gradient(at 50% 120%, var(--grad-green) 0px, transparent 40%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Inter', sans-serif; /* Cleaner tech font */
+    color: var(--primary-text);
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Typography - Updated to match the bold, clean headers in the image */
+h1, h2, h3, .navbar-brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; /* Extra bold headings */
+    letter-spacing: -0.02em; /* Tight tracking like the reference */
+    color: var(--primary-text);
+}
+
+.text-muted {
+    color: var(--secondary-text) !important;
+}
+
+/* Cards - Cleaner, whiter, soft shadow */
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 24px; /* More rounded */
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05); /* Very soft shadow */
+}
+
+/* Navbar */
+.navbar {
+    background: transparent !important;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: var(--primary-text) !important;
+}
+
+.nav-link {
+    color: var(--secondary-text) !important;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--accent-blue) !important;
+}
+
+/* Buttons - The Royal Blue "Pill" style */
+.btn-primary {
+    background: var(--accent-blue);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 35px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); /* Blue shadow */
+    transition: all 0.2s ease;
+}
+
+#button_outline {
+    background: var(--white);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 35px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #484747;
+    box-shadow: 0 4px 15px rgba(173, 173, 173, 0.3); /* Blue shadow */
+    transition: all 0.2s ease;
+}
+
+#button_outline:hover {
+    background: var(--grad-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(115, 115, 116, 0.4);
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+}
+
+/* Form Styling - Clean white inputs */
+.form-control, .form-select {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    color: var(--primary-text);
+    transition: all 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); /* Blue ring */
+    border-color: var(--accent-blue);
+    outline: none;
+}
+
+/* --- CUSTOM RADIO BUTTON STYLING (Adapted to new Palette) --- */
+.radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Style for 'No' - Subtle Slate Grey */
+.btn-check:checked + .btn-outline-secondary {
+    background-color: #64748b; 
+    color: white;
+    border-color: #64748b;
+}
+
+/* Style for 'Yes' - Now uses the Royal Blue instead of Pink */
+.btn-check:checked + .btn-outline-danger {
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Base button style */
+.btn-check + .btn {
+    border-radius: 50px;
+    padding: 8px 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Badge Styling */
+.badge {
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* --- ANIMATIONS --- */
+
+.page-enter-animation {
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* Smoother easing */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Landing Page Specific Styles */
+.landing-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-title {
+    font-size: 4.5rem; /* Larger */
+    letter-spacing: -0.04em;
+    color: var(--primary-text);
+    margin-bottom: 20px;
+    line-height: 1.1;
+    z-index: 2;
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Decor - Adapted to look like the floating icons in the image */
+.cube-decor {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 16px; /* Soft square */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Soft shadow */
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Giving the "cubes" subtle colored gradients to mimic the app icons */
+.cube-1 { 
+    top: 20%; left: 15%; 
+    background: linear-gradient(135deg, #fff 0%, #eff6ff 100%);
+    border: 1px solid #dbeafe;
+    animation-delay: 0s; 
+}
+
+.cube-2 { 
+    bottom: 20%; right: 15%; 
+    width: 80px; height: 80px; 
+    background: linear-gradient(135deg, #fff 0%, #f0fdf4 100%);
+    border: 1px solid #dcfce7;
+    animation-delay: 1.5s; 
+}
+
+.cube-3 { 
+    top: 15%; right: 25%; 
+    width: 50px; height: 50px; 
+    background: linear-gradient(135deg, #fff 0%, #faf5ff 100%);
+    border: 1px solid #f3e8ff;
+    animation-delay: 3s; 
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.slide-out-up {
+    animation: pageExitUp 0.6s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+@keyframes pageExitUp {
+    to {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}

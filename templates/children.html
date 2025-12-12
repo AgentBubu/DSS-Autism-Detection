@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-enter-animation">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Data Anak</h2>
+            <p class="text-muted">Daftar profil anak yang telah melakukan skrining.</p>
+        </div>
+        <a href="/start" class="btn btn-primary btn-sm">+ Tambah Anak (Tes Baru)</a>
+    </div>
+
+    <div class="card p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light text-muted">
+                    <tr>
+                        <th class="ps-4 py-3">Nama Lengkap</th>
+                        <th class="py-3">Tanggal Lahir</th>
+                        <th class="py-3">Jenis Kelamin</th>
+                        <th class="py-3">Riwayat Keluarga</th>
+                        <th class="py-3">Tes Terakhir</th>
+                        <!-- NEW COLUMN HEADER -->
+                        <th class="text-end pe-4 py-3" style="min-width: 100px;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for child in children %}
+                    <tr>
+                        <td class="ps-4 fw-bold text-dark">{{ child.name }}</td>
+                        <td>{{ child.dob }}</td>
+                        <td>
+                            {% if child.gender == 'Laki-laki' %}
+                                <span class="badge bg-info bg-opacity-10 text-info border border-info">L</span>
+                            {% elif child.gender == 'Perempuan' %}
+                                <span class="badge bg-danger bg-opacity-10 text-danger border border-danger">P</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="small text-muted">{{ child.family }}</td>
+                        <td class="text-muted small">{{ child.last_test }}</td>
+                        
+                        <!-- NEW COLUMN CONTENT -->
+                        <td class="text-end pe-4">
+                            <!-- Edit Button -->
+                            <a href="/edit_child?name={{ child.name }}&dob={{ child.dob }}" class="btn btn-sm btn-outline-secondary me-1" title="Edit Data">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <!-- Delete Button (Wrapped in Form for safety) -->
+                            <form action="/delete_child" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data {{ child.name }}? Semua riwayat tes anak ini akan ikut terhapus.');">
+                                <input type="hidden" name="name" value="{{ child.name }}">
+                                <input type="hidden" name="dob" value="{{ child.dob }}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus Data">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">Belum ada data anak.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

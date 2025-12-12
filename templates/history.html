@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Data Tes</h3>
+        <a href="/" class="btn btn-sm btn-primary">+ Tes Baru</a>
+    </div>
+    
+    <table class="table table-hover table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Tanggal</th>
+                <th>Nama</th>
+                <th>Skor</th>
+                <th>Tingkat Risiko</th>
+                <th>Rekomendasi AI</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in history %}
+            <tr>
+                <td>{{ row.date }}</td>
+                <td class="fw-bold">{{ row.name }}</td>
+                <td>{{ row.score }}</td>
+                <td>
+                    {% if row.risk == 'High' %} <span class="text-danger fw-bold">Tinggi</span>
+                    {% elif row.risk == 'Medium' %} <span class="text-warning fw-bold">Sedang</span>
+                    {% else %} <span class="text-success fw-bold">Rendah</span>
+                    {% endif %}
+                </td>
+                <td>{{ row.program_name }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center">Data Tidak Ditemukan.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

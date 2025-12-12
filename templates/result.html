@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card p-5 shadow-sm">
+            <h2 class="text-center mb-4">Hasil Analisis: {{ result.name }}</h2>
+            
+             <!-- NEW: Child Profile Badge -->
+            <div class="text-center mb-5">
+                <span class="badge bg-white text-dark border me-2"><i class="bi bi-calendar"></i> {{ result.dob }}</span>
+                <span class="badge bg-white text-dark border me-2"><i class="bi bi-gender-ambiguous"></i> {{ result.gender }}</span>
+                <span class="badge bg-white text-dark border"><i class="bi bi-heart-pulse"></i> {{ result.family }}</span>
+            </div>
+
+            <!-- SUMMARY SECTION -->
+            <div class="row text-center mb-5 align-items-center">
+                <div class="col-md-4 border-end">
+                    <h5 class="text-muted text-uppercase small ls-1">FAHP Risk Score</h5>
+                    <h1 class="display-4 fw-bold text-primary">{{ result.score }}</h1>
+                    {% if result.risk == 'High' %}
+                        <span class="badge bg-danger p-2">Tingkat Risiko: Tinggi</span>
+                    {% elif result.risk == 'Medium' %}
+                        <span class="badge bg-warning text-dark p-2">Tingkat Risiko: Sedang</span>
+                    {% else %}
+                        <span class="badge bg-success p-2">Tingkat Risiko: Rendah</span>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4 border-end">
+                    <h5 class="text-muted text-uppercase small ls-1">Kriteria Paling Menonjol</h5>
+                    <h3 class="text-dark mt-3">{{ result.prominent_criteria.name }}</h3>
+                    <h5 class="text-secondary">({{ result.prominent_criteria.code }})</h5>
+                    <div class="mt-2 text-muted small">Skor Normalisasi: {{ result.prominent_criteria.value }}</div>
+                </div>
+
+                <div class="col-md-4">
+                    <h5 class="text-muted text-uppercase small ls-1">Rekomendasi Program</h5>
+                    <h3 class="text-info fw-bold mt-3">{{ result.program_name }}</h3>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- DETAIL PROGRAM SECTION -->
+            <div class="mt-4">
+                <h4 class="mb-4 text-primary"><i class="bi bi-journal-text"></i> Detail Program Pendidikan</h4>
+                
+                <div class="card bg-light border-0">
+                    <div class="card-body p-4">
+                        
+                        <!-- Check if data exists -->
+                        {% if result.program_details %}
+                        
+                            <div class="mb-4">
+                                <label class="fw-bold text-uppercase text-secondary small mb-2">Tujuan Utama</label>
+                                <p class="bg-white p-3 rounded shadow-sm border h-100">
+                                    {{ result.program_details.goal }}
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="fw-bold text-uppercase text-secondary small mb-2">Aktivitas</label>
+                                        <div class="bg-white p-3 rounded shadow-sm border h-100">
+                                            {{ result.program_details.activity }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="fw-bold text-uppercase text-secondary small mb-2">Penerapan di Sekolah</label>
+                                        <div class="bg-white p-3 rounded shadow-sm border h-100">
+                                            {{ result.program_details.school }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <div class="alert alert-warning">
+                                Data detail program tidak ditemukan. Mohon periksa kembali database program.
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 text-center">
+                <a href="/" id="button_outline" class="btn btn-primary px-4 me-2">Test Anak Lain</a>
+                <a href="/history" class="btn btn-primary px-4">Lihat Riwayat</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ls-1 { letter-spacing: 1px; }
+</style>
+{% endblock %}
