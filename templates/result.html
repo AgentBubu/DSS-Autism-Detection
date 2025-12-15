@@ -5,7 +5,7 @@
         <div class="card p-5 shadow-sm">
             <h2 class="text-center mb-4">Hasil Analisis: {{ result.name }}</h2>
             
-             <!-- NEW: Child Profile Badge -->
+             <!-- Child Profile Badge -->
             <div class="text-center mb-5">
                 <span class="badge bg-white text-dark border me-2"><i class="bi bi-calendar"></i> {{ result.dob }}</span>
                 <span class="badge bg-white text-dark border me-2"><i class="bi bi-gender-ambiguous"></i> {{ result.gender }}</span>
@@ -87,10 +87,21 @@
                 </div>
             </div>
 
-            <div class="mt-5 text-center">
-                <a href="/" id="button_outline" class="btn btn-primary px-4 me-2">Test Anak Lain</a>
-                <a href="/history" class="btn btn-primary px-4">Lihat Riwayat</a>
+            <!-- NAVIGATION BUTTONS -->
+            <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top">
+                
+                <!-- PREVIOUS: Back to ML Analysis -->
+                <a href="/ml_view/{{ result.id }}" class="btn btn-outline-secondary btn-lg px-4">
+                    <i class="bi bi-arrow-left me-2"></i> Analisis AI
+                </a>
+
+                <!-- ACTIONS: Test Again / History -->
+                <div>
+                    <a href="/" id="button_outline" class="btn btn-primary px-4 me-2">Test Anak Lain</a>
+                    <a href="/history" class="btn btn-primary px-4">Lihat Riwayat</a>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

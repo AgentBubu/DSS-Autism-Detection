@@ -1,32 +1,70 @@
 [
     {
-        "name": "Patrick",
-        "dob": "2020-06-21",
+        "name": "Budi Santoso",
+        "dob": "2011-11-04",
         "gender": "Laki-laki",
-        "family": "Ada - Ringan",
-        "score": 0.626,
-        "risk": "Medium",
-        "program_name": "Terapi Integrasi Sensorik",
+        "family": "Tidak Ada",
+        "date": "2025-12-15 21:39",
+        "score": 1.004,
+        "risk": "High",
+        "program_name": "Metode TEACCH",
         "program_details": {
-            "code": "C1",
-            "title": "Terapi Integrasi Sensorik",
-            "goal": "Membantu otak anak memproses informasi sensorik (suara, sentuhan, cahaya) dengan lebih efisien agar tidak merasa kewalahan (overwhelmed) atau kurang peka.",
-            "activity": "Menggunakan alat seperti noise cancelling headphones, ruangan kedap suara untuk menenangkan anak.",
-            "school": "Penyediaan Quiet Corner (pojok tenang) saat anak merasa bising. Penggunaan noise-canceling headphones saat belajar mandiri. Modifikasi lingkungan kelas dengan pencahayaan yang tidak terlalu menyilaukan."
+            "code": "C5",
+            "title": "Metode TEACCH",
+            "goal": "Memberikan struktur visual yang sangat jelas untuk mengurangi kecemasan akan perubahan dan memanfaatkan kekuatan visual anak.",
+            "activity": "Menggunakan gambar untuk menunjukkan urutan kegiatan harian sehingga anak tahu apa yang akan terjadi selanjutnya. Misalkan, seorang anak sangat terobsesi dengan kereta api, guru menggunakan kereta api sebagai sarana belajar matematika.",
+            "school": "Memberikan peringatan waktu (timer) sebelum transisi antar mata pelajaran agar anak tidak kaget saat harus berganti aktivitas."
         },
         "prominent_criteria": {
-            "code": "C1",
-            "name": "Sensitivitas Sensorik",
+            "code": "C5",
+            "name": "Minat Terbatas",
             "value": 1.0
         },
         "features": {
-            "C1": 1.0,
-            "C2": 0.3333333333333333,
+            "C1": 0.6666666666666666,
+            "C2": 0.6666666666666666,
             "C3": 0.5,
             "C4": 0.0,
-            "C5": 0.0
+            "C5": 1.0
         },
-        "id": 1,
-        "date": "2025-12-12 16:52"
+        "ml_confidence": [
+            {
+                "label": "Metode TEACCH",
+                "probability": 89.0
+            },
+            {
+                "label": "Pelatihan Keterampilan Sosial",
+                "probability": 9.0
+            },
+            {
+                "label": "Terapi Wicara Pragmatik",
+                "probability": 2.0
+            },
+            {
+                "label": "DIR (Floortime)",
+                "probability": 0.0
+            },
+            {
+                "label": "Pendampingan Reguler",
+                "probability": 0.0
+            },
+            {
+                "label": "Terapi Integrasi Sensorik",
+                "probability": 0.0
+            }
+        ],
+        "raw_answers": {
+            "q1": "1",
+            "q2": "1",
+            "q3": "0",
+            "q4": "1",
+            "q5": "1",
+            "q6": "0",
+            "q7": "0",
+            "q8": "0",
+            "q9": "1",
+            "q10": "1"
+        },
+        "id": 1
     }
 ]
